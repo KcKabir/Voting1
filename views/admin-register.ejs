@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Admin Registration</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <div class="container">
+    <h2>Admin Registration</h2>
+    <form action="/admin-register" method="POST">
+
+      <label for="username">Admin Username:</label>
+      <input type="text" name="username" required placeholder="Enter username" />
+      <br>
+
+      <label for="password">Admin Password:</label>
+      <input type="password" name="password" required placeholder="Enter password" />
+      <br>
+
+      <button type="submit">Register Admin</button>
+
+      <% if (error) { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+    </form>
+    <p>Already have an admin account? <a href="/admin">Login here</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+  <title>Voting System</title>
+</head>
+<body>  
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="logo">🎓 University Feedback System</span>
+        </div>
+        <div class="nav-right">
+            <a href="/">Home</a>
+            <a href="/admin">🔒 Admin Login</a>
+            <% if (user) { %>
+            <a href="/vote">🗳️ Vote</a>
+            <a href="/logout">🚪 Logout</a>
+            <% } else { %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <% } %>
+        </div>
+    </nav>
+
+  
+    <div class="topcontainer">
+    <div class="leftside">
+      <h1>Welcome to the University Feedback System</h1>
+      <p>Give us your opinion on subjects and professors to help improve the university's education quality.</p>
+
+      <% if (user) { %>
+        <p>Logged in as <%= user %></p>
+        <a href="/vote">Go to Voting</a>
+      <% } else { %>
+        <p>
+          Already registered? <a href="/login">Login</a><br/>
+          New user? <a href="/register">Register</a>
+        </p>
+      <% } %>
+    <section class="importance-section">
+        <h2>📢 Why This Feedback System Matters</h2>
+        <p>The University Voting and Feedback System is designed to create a transparent, fair, and impactful way for students to express their academic experiences.</p>
+        <ul>
+            <li><strong>🎓 Empower Students:</strong> Your voice matters. Share your experience with subjects and professors to help improve the university’s education quality.</li>
+            <li><strong>📈 Improve Teaching Standards:</strong> Constructive feedback helps faculty understand what’s working and what isn’t — leading to better teaching methods and more engaging classes.</li>
+            <li><strong>🧭 Guide Curriculum Design:</strong> Feedback and ratings help academic departments make informed decisions when it comes to revising syllabi, teaching strategies, or introducing new subjects.</li>
+            <li><strong>🔐 Confidential & Secure:</strong> Your feedback is safely stored and only accessible to authorized admin personnel. You can be honest without fear — your privacy is respected.</li>
+            <li><strong>🛠️ Continuous Improvement:</strong> The goal is not just evaluation, but evolution. Your opinions drive change, innovation, and overall improvement in university academics.</li>
+        </ul>
+    </section>
+
+    <section class="importance-section">
+      <h2>Guidelines</h2>
+      <ol>
+        <li><strong>Registration is MANDATORY</strong><br/>All students must register and log in to access the voting and feedback portal.</li>
+        <li><strong>While registering, use your official name</strong><br/>Enter your full official name used in university records. This helps ensure authenticity and traceability.</li>
+        <li><strong>Enter your own subjects and professors</strong><br/>Manually input the subjects you've studied and the names of the respective professors. Avoid fake entries.</li>
+        <li><strong>One Submission Per User</strong><br/>Re-submissions will overwrite the previous one.</li>
+        <li><strong>Be Honest and Constructive</strong><br/>Rate honestly and provide useful suggestions if needed.</li>
+        <li><strong>Ratings Are Confidential</strong><br/>Responses are securely stored and only accessible to admins.</li>
+        <li><strong>Avoid Offensive Language</strong><br/>Disrespectful language will result in disqualification.</li>
+        <li><strong>Review Before Submitting</strong><br/>Once submitted, your feedback is final (unless editing is allowed).</li>
+      </ol>
+      </section>
+    </div>
+
+    <div class="rightside">
+        <h2>Student Subject Ratings: </h2>
+        <div class="student-review">            
+            <img src="/images/kc.jpg" alt="Student Photo">  
+            <div class="review-content">
+                <h3>Kabir Chauhan</h3>
+                <h4>Subjects:</h4>
+                <ol>
+                <li><strong>Operating Systems:</strong> Easy, quick and simple.</li>
+                <li><strong>Artificial Neural Network:</strong> A very simple and important topic for Machine Learning.</li>
+                <li><strong>ADA:</strong> Just why? Too complicated.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="student-review">            
+            <img src="/images/Div.jpg" alt="Student Photo">  
+            <div class="review-content">
+                <h3>Divyanshi Sharma</h3>
+                <h4>Subjects:</h4>
+                <ol>
+                <li><strong>Microbiology:</strong> I loved this subject.</li>
+                <li><strong>Cell Dynamics and Genetics:</strong> It's interesting and basics of Biotechnology.</li>
+                <li><strong>Animal physiology:</strong> Interesting but too complicated. </li>
+                </ol>
+            </div>
+        </div>
+        <div class="student-review">            
+            <img src="/images/bund1.jpg" alt="Student Photo">  
+            <div class="review-content">
+                <h3>Sahib Taj Singh</h3>
+                <h4>Subjects:</h4>
+                <ol>
+                <li><strong>DBMS:</strong> Good sleeping subject.</li>
+                <li><strong>DCCN:</strong> Good subject, bad marks.</li>
+                <li><strong>BEEE:</strong> Too complicated and we dont even need this.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="student-review">            
+            <img src="/images/pokemon.jpg" alt="Student Photo">  
+            <div class="review-content">
+                <h3>Sneha Kushwaha</h3>
+                <h4>Subjects:</h4>
+                <ol>
+                <li><strong>ICPC:</strong> A decent beginner C introduction.</li>
+                <li><strong>AI:</strong> Amazing and super easy, plus i can use AI for my content.</li>
+                <li><strong>Cyber Security:</strong> No review.</li>
+                </ol>
+            </div>
+        </div>
+        <hr>
+        <h2>Professors ratings given by the students: </h2>
+        <div class="student-review">            
+            <img src="/images/archit.jpg" alt="Student Photo">  
+            <div class="review-content">
+                <h3>Dr. Archit Yadav</h3>
+                <h4>Students:</h4>
+                <ol>
+                <li><strong>Kabir Chauhan:</strong> Zero patience and horrible scene of humor.</li>
+                <li><strong>Sahib Taj Singh:</strong> Okayish teacher.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+
+</body>
+</html>

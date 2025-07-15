@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vote & Feedback</title>
+  <link rel="stylesheet" href="vote.css">
+
+  <script>
+    function addSection(type) {
+      const container = document.getElementById(type + '-container');
+      const div = document.createElement('div');
+      div.classList.add('dynamic-box');
+      div.innerHTML = `
+        <input type="hidden" name="type" value="${type}">
+        <label>${type.charAt(0).toUpperCase() + type.slice(1)} Name:</label>
+        <input name="name" placeholder="e.g., OS / Prof. Sharma" required>
+
+        <label>Rating:</label>
+        <select name="rating" required>
+          <option value="">-- Select Rating --</option>
+          <option>10.0</option>
+          <option>9.0</option>
+          <option>8.0</option>
+          <option>7.0</option>
+          <option>6.0</option>
+          <option>5.0</option>
+          <option>4.0</option>
+          <option>3.0</option>
+          <option>2.0</option>
+          <option>1.0</option>
+          <option>Worst</option>
+        </select>
+
+        <label>Feedback:</label>
+        <textarea name="feedback" placeholder="Write your feedback..." required></textarea>
+      `;
+      container.appendChild(div);
+    }
+  </script>
+  <%- include('partials/header') %>
+</head>
+<body >
+  <div class="punisher"> 
+    <div class="glass-container">
+      <h2>🎓 Welcome, <%= username %>!</h2>
+
+      <form method="POST">
+        <div class="section">
+          <h3>📘 Subjects</h3>
+          <div id="subject-container"></div>
+          <button type="button" class="btn" onclick="addSection('subject')">+ Add Subject</button>
+        </div>
+
+        <div class="section">
+          <h3>👨‍🏫 Professors</h3>
+          <div id="professor-container"></div>
+          <button type="button" class="btn" onclick="addSection('professor')">+ Add Professor</button>
+        </div>
+
+        <button type="submit" class="btn">✅ Submit / Update Feedback</button>
+      </form>
+
+      <div class="reset-remove-buttons">
+        <form method="POST" action="/reset">
+          <button class="btn secondary-btn" type="submit">🔄 Reset My Feedback</button>
+        </form>
+
+        <form method="POST" action="/remove">
+          <button class="btn secondary-btn" type="submit">🗑️ Remove My Feedback</button>
+        </form>
+
+        <a href="/download">📥 Download My Feedback</a>
+      </div>
+    </div>
+  </div>
+<%- include('partials/footer') %>
+</body>
+</html>

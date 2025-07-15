@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/dashboard.css">
+  
+</head>
+<body>
+  
+  <div class="container">
+    <div style="text-align: right;">
+      <a class="btn back" href="/">← Back to Home</a>
+    </div>
+
+    <h1>📊 Admin Dashboard</h1>
+    <p class="welcome">Welcome, <%= admin %></p>
+    <a class="btn download" href="/admin/download">📥 Download All Feedback</a>
+
+    <h3>📋 All Feedback Entries</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr>
+          <th>User ID</th>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Rating</th>
+          <th>Feedback</th>
+        </tr>
+        <% feedback.forEach(entry => { %>
+          <tr>
+            <td><%= entry.user_id %></td>
+            <td><%= entry.type %></td>
+            <td><%= entry.name %></td>
+            <td><%= entry.rating %></td>
+            <td><%= entry.feedback %></td>
+          </tr>
+        <% }); %>
+      </table>
+    </div>
+
+    <h3>📈 Rating Summary</h3>
+    <div class="chart-container">
+      <canvas id="subjectChart"></canvas>
+      <canvas id="professorChart"></canvas>
+    </div>
+
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <a class="btn back" href="/">← Back to Home</a>
+    </div>
+  </div>
+  <script>
+  const rawFeedback = <%- JSON.stringify(feedback).replace(/</g, '\\u003c') %>;
+
+  const processFeedback = (type) => {
+    const entries = rawFeedback.filter(fb => fb.type === type);
+
+    return {
+      labels: entries.map(fb => fb.name + ' (' + fb.rating + ')'),
+      ratings: entries.map(fb => parseFloat(fb.rating) || 0),
+      tooltips: entries.map(fb => `Name: ${fb.name}\nRating: ${fb.rating}\nFeedback: ${fb.feedback}`)
+    };
+  };
+
+  const subjectData = processFeedback("subject");
+  const professorData = processFeedback("professor");
+
+  new Chart(document.getElementById('subjectChart'), {
+    type: 'bar',
+    data: {
+      labels: subjectData.labels,
+      datasets: [{
+        label: 'Subject Ratings',
+        data: subjectData.ratings,
+        backgroundColor: '#42a5f5'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return subjectData.tooltips[context.dataIndex];
+            }
+          }
+        }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('professorChart'), {
+    type: 'bar',
+    data: {
+      labels: professorData.labels,
+      datasets: [{
+        label: 'Professor Ratings',
+        data: professorData.ratings,
+        backgroundColor: '#66bb6a'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return professorData.tooltips[context.dataIndex];
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+<%- include('partials/footer') %>
+</body>
+</html>

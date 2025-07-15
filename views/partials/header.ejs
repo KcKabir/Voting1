@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="style.css">
+
+<nav class="navbar">
+  <div class="nav-left">
+    <span class="logo">🎓 University Feedback System</span>
+  </div>
+  <div class="nav-right">
+    <a href="/">Home</a>
+    <% if (user) { %>
+      <a href="/vote">🗳️ Vote</a>
+      <a href="/logout">🚪 Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>
