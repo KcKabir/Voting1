@@ -8,7 +8,6 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 
 const app = express();
-const port = 3000;
 const saltRounds = 11;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -256,7 +255,7 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-
+const port = process.env.PORT || 3000;
 app.listen(3000, () => {
   console.log("IT WORKS!");
 });
