@@ -11,15 +11,12 @@ const app = express();
 const saltRounds = 11;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "project",
-  password: "admin123",
-  port: 5432,
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  }
 });
-
-db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -255,14 +252,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false, 
-  }
-});
-module.exports = pool;
 
 const port = process.env.PORT || 3000;
 app.listen(3000, () => {
