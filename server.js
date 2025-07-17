@@ -196,7 +196,7 @@ app.post("/admin", async (req, res) => {
 });
 
 app.get("/admin-register", (req, res) => {
-  res.render("admin-register", { error: null });
+  res.render("admin-register", { error: null, user: req.session.username});
 });
 
 app.post("/admin-register", async (req, res) => {
@@ -254,6 +254,13 @@ app.get("/logout", (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("IT WORKS!");
+});
+
+app.use((req, res) => {
+  res.status(404).render("message", {
+    message: "404 - Page Not Found",
+    user: req.session?.username || null
+  });
 });
